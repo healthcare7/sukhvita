@@ -5,37 +5,53 @@
   right: 20px;
   background-color: #25D366;
   color: white;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  border-radius: 30px; /* Made generic capsule shape to hold text */
+  padding: 0 20px;
+  height: 54px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px; /* Space between icon and text */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   z-index: 9999;
   transition: transform 0.2s ease-in-out;
   text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .whatsapp-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .whatsapp-btn svg {
-  width: 35px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
   fill: white;
 }
 
-@media (max-width: 768px) {
+.whatsapp-text {
+  display: inline-block;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
   .whatsapp-btn {
     bottom: 15px;
     right: 15px;
+    padding: 0;
     width: 50px;
     height: 50px;
+    border-radius: 50%; /* Switches back to a circle icon on tiny screens to save space */
   }
+  
+  .whatsapp-text {
+    display: none; /* Hides text on small screens */
+  }
+
   .whatsapp-btn svg {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
   }
 }
