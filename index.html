@@ -476,39 +476,17 @@ Get Started
 </a>
 <!-- WhatsApp Floating button End-->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="js/main.js"></script>
 
-<!-- Script for refresh page-->
- <script>
-fetch('/version.json')
-  .then(res => res.json())
-  .then(data => {
-    const currentVersion = localStorage.getItem('siteVersion');
-    if (data.version !== currentVersion) {
-      // Show a refresh button instead of auto reload
-      const refreshBanner = document.createElement('div');
-      refreshBanner.innerHTML = `
-        <div style="position:fixed;bottom:10px;left:50%;transform:translateX(-50%);
-                    background:#333;color:#fff;padding:10px 20px;border-radius:5px;
-                    font-family:sans-serif;z-index:9999;">
-          New version available!
-          <button style="margin-left:10px;padding:5px 10px;cursor:pointer;">Refresh</button>
-        </div>
-      `;
-      document.body.appendChild(refreshBanner);
 
-      // Add click event to reload
-      refreshBanner.querySelector('button').addEventListener('click', () => {
-        localStorage.setItem('siteVersion', data.version);
-        location.reload(true);
-      });
-    }
-  });
-</script>
 
- <!-- Script for refresh page end-->
+<!-- Script section-->
+ 
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="js/main.js"></script>
+ <script src="version-check.js"></script> <!-- Script for refresh page-->
+
+ <!-- Script section end-->
 
 </body>
 </html>
