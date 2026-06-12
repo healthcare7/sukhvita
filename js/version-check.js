@@ -1,4 +1,4 @@
-fetch('/sukhvita/version.json')
+fetch('/sukhvita/json/version.json')
   .then(res => res.json())
   .then(data => {
     const currentVersion = localStorage.getItem('siteVersion');
