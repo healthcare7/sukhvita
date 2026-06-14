@@ -507,54 +507,55 @@ Get Started
 
       <!-- Body -->
       <div class="modal-body text-center px-5">
-        <form id="appointmentForm">
+  <form id="appointmentForm">
 
-          <!-- Step 1 -->
-          <div class="form-step active">
-            <div class="mb-3">
-              <input type="text" class="form-control text-center" placeholder="Full Name" required>
-            </div>
-            <div class="mb-3">
-              <input type="tel" class="form-control text-center" placeholder="Phone Number" required>
-            </div>
-            <div class="mb-3">
-              <input type="email" class="form-control text-center" placeholder="Email">
-            </div>
-            <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="form-step">
-            <div class="mb-3">
-              <input type="date" class="form-control text-center" required>
-            </div>
-            <div class="mb-3">
-              <input type="time" class="form-control text-center" required>
-            </div>
-            <button type="button" class="btn btn-outline-brand btn-sm prev-step me-2">Back</button>
-            <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="form-step">
-            <div class="mb-3">
-              <select id="serviceSelect" class="form-select text-center" required>
-                <option disabled selected>Select Service</option>
-                <option>Nursing Care</option>
-                <option>Elder Care</option>
-                <option>Physiotherapy</option>
-                <option>Diagnostics</option>
-                <option>Caregiver Services</option>
-                <option>Doctor Visit</option>
-                <option>Medical Equipment Rental</option>
-              </select>
-            </div>
-            <button type="button" class="btn btn-outline-brand btn-sm prev-step me-2">Back</button>
-            <button id="submitBtn" type="submit" class="btn btn-brand btn-sm" disabled>Submit Request</button>
-          </div>
-
-        </form>
+    <!-- Step 1 -->
+    <div class="form-step active">
+      <div class="mb-3">
+        <input type="text" class="form-control text-center" placeholder="Full Name" required>
       </div>
+      <div class="mb-3">
+        <input type="tel" class="form-control text-center" placeholder="Phone Number" required pattern="[0-9]{10}">
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control text-center" placeholder="Email (optional)">
+      </div>
+      <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="form-step">
+      <div class="mb-3">
+        <input type="date" class="form-control text-center" placeholder="Select Date" required>
+      </div>
+      <div class="mb-3">
+        <input type="time" class="form-control text-center" placeholder="Select Time" required>
+      </div>
+      <button type="button" class="btn btn-outline-brand btn-sm prev-step me-2">Back</button>
+      <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="form-step">
+      <div class="mb-3">
+        <select id="serviceSelect" class="form-select text-center" required>
+          <option disabled selected>Select Service</option>
+          <option>Nursing Care</option>
+          <option>Elder Care</option>
+          <option>Physiotherapy</option>
+          <option>Diagnostics</option>
+          <option>Caregiver Services</option>
+          <option>Doctor Visit</option>
+          <option>Medical Equipment Rental</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-outline-brand btn-sm prev-step me-2">Back</button>
+      <button id="submitBtn" type="submit" class="btn btn-brand btn-sm" disabled>Submit Request</button>
+    </div>
+
+  </form>
+</div>
+
     </div>
   </div>
 </div>
@@ -589,9 +590,13 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.addEventListener("click", () => {
       const inputs = steps[currentStep].querySelectorAll("input, select");
       let valid = true;
-      inputs.forEach(input => { if (!input.checkValidity()) valid = false; });
+      inputs.forEach(input => {
+        if (!input.checkValidity()) {
+          valid = false;
+          input.reportValidity(); // show error message
+        }
+      });
       if (valid) showStep(currentStep + 1);
-      else inputs[0].reportValidity();
     });
   });
 
@@ -607,6 +612,7 @@ document.addEventListener("DOMContentLoaded", function() {
   showStep(0);
 });
 </script>
+
 
  <!-- Script section end-->
 
