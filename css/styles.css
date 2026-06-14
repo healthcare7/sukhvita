@@ -511,3 +511,87 @@ footer a:hover{
     padding:60px 0;
   }
 }
+
+/*---------------------@@@@@@@@@@@------------------*/
+/* Modal Steps */
+.step-circle {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #eaf9fa;
+  color: #14939A;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600;
+}
+.step-circle.active {
+  background: #14939A;
+  color: #fff;
+}
+.step-line {
+  width: 60px; height: 3px;
+  background: #eaf9fa;
+  margin: auto 8px;
+}
+.form-step { display: none; }
+.form-step.active { display: block; }
+
+/* Brand shades */
+.bg-brand-dark { background:#0F7F86; }
+.bg-brand-light { background:#EAF9FA; }
+
+/* Steps */
+.step-circle {
+  width:36px; height:36px;
+  border-radius:50%;
+  background:#eaf9fa;
+  color:#14939A;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:600;
+}
+.step-circle.active { background:#14939A; color:#fff; }
+.step-line { width:50px; height:3px; background:#eaf9fa; margin:auto 8px; }
+
+.form-step { display:none; }
+.form-step.active { display:block; }
+
+/* Compact buttons */
+.btn-sm { padding:6px 16px; font-size:14px; }
+
+
+.bg-brand-dark { background:#0F7F86; }
+.bg-brand-light { background:#EAF9FA; }
+
+.step-circle {
+  width:36px; height:36px;
+  border-radius:50%;
+  background:#eaf9fa;
+  color:#14939A;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:600;
+}
+.step-circle.active { background:#14939A; color:#fff; }
+.step-line { width:50px; height:3px; background:#eaf9fa; margin:auto 8px; }
+
+.form-step { display:none; }
+.form-step.active { display:block; }
+
+.btn-sm { padding:6px 16px; font-size:14px; }
+.modal-body { margin:0 auto; max-width:500px; } /* center with margin */
+
+/* Progress steps */
+.step-circle {
+  width:36px; height:36px;
+  border-radius:50%;
+  background:#d3d3d3; /* light grey */
+  color:#14939A;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:600;
+}
+.step-circle.active { background:#14939A; color:#fff; }
+.step-line { width:50px; height:3px; background:#d3d3d3; margin:auto 8px; }
+
+.form-step { display:none; }
+.form-step.active { display:block; }
+
+.btn-sm { padding:6px 16px; font-size:14px; }
+.modal-body { margin:0 auto; max-width:500px; }
+
