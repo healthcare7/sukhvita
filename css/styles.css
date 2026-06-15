@@ -629,28 +629,28 @@ footer a:hover{
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(20px); /* start slightly lower */
+  transform: translateX(-50%) translateY(30px); /* start lower */
   background: #22C55E;
   color: #fff;
   padding: 12px 24px;
   border-radius: 8px;
   font-size: 14px;
-  display: none;
   z-index: 2000;
 
-  /* Polished look */
-  border: 2px solid #16A34A; /* darker green border */
+  /* polished look */
+  border: 2px solid #16A34A;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 
-  /* Animation */
+  /* animation setup */
   opacity: 0;
+  pointer-events: none; /* prevent blocking clicks */
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .toast-message.show {
-  display: block;
   opacity: 1;
   transform: translateX(-50%) translateY(0); /* slide up */
 }
+
 
 
 
