@@ -507,29 +507,34 @@ Get Started
 
       <!-- Body -->
       <div class="modal-body text-center px-5">
-  <form id="appointmentForm">
+          <form id="appointmentForm">
 
-    <!-- Step 1 -->
-    <div class="form-step active">
-      <div class="mb-3">
-        <input type="text" class="form-control text-center" placeholder="Full Name" required>
-      </div>
-      <div class="mb-3">
-        <input type="tel" class="form-control text-center" placeholder="Phone Number" required pattern="[0-9]{10}">
-      </div>
-      <div class="mb-3">
-        <input type="email" class="form-control text-center" placeholder="Email (optional)">
-      </div>
+          <!-- Step 1 -->
+            <div class="form-step active">
+              <div class="mb-3 text-start">
+                <input type="text" class="form-control text-center" placeholder="Full Name" required>
+                <div class="error-message"></div>
+              </div>
+              <div class="mb-3 text-start">
+                <input type="tel" class="form-control text-center" placeholder="Phone Number" required pattern="[0-9]{10}">
+                <div class="error-message"></div>
+              </div>
+              <div class="mb-3 text-start">
+                <input type="email" class="form-control text-center" placeholder="Email (optional)">
+                <div class="error-message"></div>
+              </div>
       <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
     </div>
 
     <!-- Step 2 -->
     <div class="form-step">
-      <div class="mb-3">
+      <div class="mb-3 text-start">
         <input type="date" class="form-control text-center" placeholder="Select Date" required>
+        <div class="error-message"></div>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 text-start">
         <input type="time" class="form-control text-center" placeholder="Select Time" required>
+        <div class="error-message"></div>
       </div>
       <button type="button" class="btn btn-outline-brand btn-sm prev-step me-2">Back</button>
       <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
@@ -537,7 +542,7 @@ Get Started
 
     <!-- Step 3 -->
     <div class="form-step">
-      <div class="mb-3">
+      <div class="mb-3 text-start">
         <select id="serviceSelect" class="form-select text-center" required>
           <option disabled selected>Select Service</option>
           <option>Nursing Care</option>
@@ -548,13 +553,18 @@ Get Started
           <option>Doctor Visit</option>
           <option>Medical Equipment Rental</option>
         </select>
+        <div class="error-message"></div>
       </div>
       <button type="button" class="btn btn-outline-brand btn-sm prev-step me-2">Back</button>
-      <button id="submitBtn" type="submit" class="btn btn-brand btn-sm" disabled>Submit Request</button>
+      <button id="submitBtn" type="submit" class="btn btn-brand btn-sm">Submit Request</button>
     </div>
 
   </form>
 </div>
+
+<!-- Success Toast -->
+<div id="successToast" class="toast-message">Request submitted successfully! You will get call from our side soon.</div>
+
 
     </div>
   </div>
@@ -572,12 +582,14 @@ Get Started
  <script src="js/main.js"></script>
  <script src="js/version-check.js"></script> <!-- Script for refresh page-->
 
-<script>
+ <script>
 document.addEventListener("DOMContentLoaded", function() {
   const steps = document.querySelectorAll(".form-step");
   const circles = document.querySelectorAll(".step-circle");
   const serviceSelect = document.getElementById("serviceSelect");
   const submitBtn = document.getElementById("submitBtn");
+  const form = document.getElementById("appointmentForm");
+  const toast = document.getElementById("successToast");
   let currentStep = 0;
 
   function showStep(index) {
@@ -586,17 +598,29 @@ document.addEventListener("DOMContentLoaded", function() {
     currentStep = index;
   }
 
+  function validateStep(stepIndex) {
+    let valid = true;
+    const inputs = steps[stepIndex].querySelectorAll("input, select");
+    inputs.forEach(input => {
+      const errorDiv = input.parentElement.querySelector(".error-message");
+      if (!input.checkValidity()) {
+        valid = false;
+        if (input.type === "text") errorDiv.textContent = "Please enter your name";
+        else if (input.type === "tel") errorDiv.textContent = "Please enter your phone number";
+        else if (input.type === "email") errorDiv.textContent = "Please enter a valid email";
+        else if (input.type === "date") errorDiv.textContent = "Please select a date";
+        else if (input.type === "time") errorDiv.textContent = "Please select a time";
+        else if (input.tagName === "SELECT") errorDiv.textContent = "Please select a service";
+      } else {
+        errorDiv.textContent = "";
+      }
+    });
+    return valid;
+  }
+
   document.querySelectorAll(".next-step").forEach(btn => {
     btn.addEventListener("click", () => {
-      const inputs = steps[currentStep].querySelectorAll("input, select");
-      let valid = true;
-      inputs.forEach(input => {
-        if (!input.checkValidity()) {
-          valid = false;
-          input.reportValidity(); // show error message
-        }
-      });
-      if (valid) showStep(currentStep + 1);
+      if (validateStep(currentStep)) showStep(currentStep + 1);
     });
   });
 
@@ -604,15 +628,28 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.addEventListener("click", () => showStep(currentStep - 1));
   });
 
-  // Disable submit until service selected
-  serviceSelect.addEventListener("change", () => {
-    submitBtn.disabled = (serviceSelect.selectedIndex === 0);
+  // Reset form on modal close
+  const modal = document.getElementById("appointmentModal");
+  modal.addEventListener("hidden.bs.modal", () => {
+    form.reset();
+    document.querySelectorAll(".error-message").forEach(e => e.textContent = "");
+    showStep(0);
+  });
+
+  // Submit with toast
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    if (validateStep(currentStep)) {
+      toast.style.display = "block";
+      setTimeout(() => { toast.style.display = "none"; }, 4000);
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+    }
   });
 
   showStep(0);
 });
 </script>
-
 
  <!-- Script section end-->
 

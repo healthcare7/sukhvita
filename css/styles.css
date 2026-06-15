@@ -595,3 +595,45 @@ footer a:hover{
 .btn-sm { padding:6px 16px; font-size:14px; }
 .modal-body { margin:0 auto; max-width:500px; }
 
+
+
+.error-message {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Step circles with labels */
+.step-container {
+  text-align: center;
+  margin: 0 10px;
+}
+.step-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #d3d3d3;
+  color: #14939A;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600;
+  margin: auto;
+}
+.step-circle.active { background: #14939A; color: #fff; }
+.step-label { font-size: 13px; margin-top: 5px; color: #555; }
+.step-line { width: 50px; height: 3px; background: #d3d3d3; margin: auto 8px; }
+
+/* Toast */
+.toast-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #22C55E;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: none;
+  z-index: 2000;
+}
+
+
