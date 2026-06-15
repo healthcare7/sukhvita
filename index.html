@@ -101,7 +101,7 @@ Trusted Healthcare Provider
 </span>
 
 <h1>
-5555 Healthcare Services
+Healthcare Services
 At Your Doorstep
 </h1>
 
@@ -116,8 +116,7 @@ with compassion and expertise.
 
 <div class="mt-4">
 
-<a href="services.html"
-class="btn btn-brand btn-lg me-3">
+<a href="#" class="btn btn-brand btn-lg me-3" data-bs-toggle="modal" data-bs-target="#appointmentModal">
 
 Book Service
 
@@ -625,25 +624,36 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function validateStep(stepIndex) {
-    let valid = true;
-    const inputs = steps[stepIndex].querySelectorAll("input, select");
-    inputs.forEach(input => {
-      const errorDiv = input.parentElement.querySelector(".error-message");
-      if (!input.checkValidity()) {
-        valid = false;
-        if (input.type === "text") errorDiv.textContent = "Please enter your name";
-        else if (input.type === "tel") errorDiv.textContent = "Please enter your phone number";
-        else if (input.type === "email" && input.value !== "") errorDiv.textContent = "Please enter a valid email";
-        else if (input.id === "citySelect") errorDiv.textContent = "Please select a city";
-        else if (input.type === "date") errorDiv.textContent = "Please select a date";
-        else if (input.type === "time") errorDiv.textContent = "Please select a time";
-        else if (input.tagName === "SELECT") errorDiv.textContent = "Please select a service";
-      } else {
-        errorDiv.textContent = "";
-      }
-    });
-    return valid;
-  }
+  let valid = true;
+  const inputs = steps[stepIndex].querySelectorAll("input, select");
+  inputs.forEach(input => {
+    const errorDiv = input.parentElement.querySelector(".error-message");
+
+    // Manual check for City dropdown
+    if (input.id === "citySelect" && input.selectedIndex === 0) {
+      errorDiv.textContent = "Please select a city";
+      valid = false;
+    }
+    // Manual check for Service dropdown (optional here, but keeps consistency)
+    else if (input.id === "serviceSelect" && input.selectedIndex === 0) {
+      errorDiv.textContent = "Please select a service";
+      valid = false;
+    }
+    // Normal validation for other fields
+    else if (!input.checkValidity()) {
+      valid = false;
+      if (input.type === "text") errorDiv.textContent = "Please enter your name";
+      else if (input.type === "tel") errorDiv.textContent = "Please enter your phone number";
+      else if (input.type === "email" && input.value !== "") errorDiv.textContent = "Please enter a valid email";
+      else if (input.type === "date") errorDiv.textContent = "Please select a date";
+      else if (input.type === "time") errorDiv.textContent = "Please select a time";
+    } else {
+      errorDiv.textContent = "";
+    }
+  });
+  return valid;
+}
+
 
   document.querySelectorAll(".next-step").forEach(btn => {
     btn.addEventListener("click", () => {
