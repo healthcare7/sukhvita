@@ -101,7 +101,7 @@ Trusted Healthcare Provider
 </span>
 
 <h1>
-4444 Healthcare Services
+5555 Healthcare Services
 At Your Doorstep
 </h1>
 
@@ -532,8 +532,20 @@ Get Started
                 <input type="email" class="form-control text-center" placeholder="Email (optional)">
                 <div class="error-message"></div>
               </div>
-      <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
-    </div>
+              <div class="mb-3 text-start">
+                <select id="citySelect" class="form-select text-center" required>
+                  <option disabled selected>Select City</option>
+                  <option>Sangli</option>
+                  <option>Miraj</option>
+                  <option>Tasgaon</option>
+                  <option>Palus</option>
+                  <option>Karad</option>
+                  <option>Islampur</option>
+                </select>
+                <div class="error-message"></div>
+              </div>
+              <button type="button" class="btn btn-brand btn-sm next-step">Next</button>
+            </div>
 
     <!-- Step 2 -->
     <div class="form-step">
@@ -622,6 +634,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (input.type === "text") errorDiv.textContent = "Please enter your name";
         else if (input.type === "tel") errorDiv.textContent = "Please enter your phone number";
         else if (input.type === "email" && input.value !== "") errorDiv.textContent = "Please enter a valid email";
+        else if (input.id === "citySelect") errorDiv.textContent = "Please select a city";
         else if (input.type === "date") errorDiv.textContent = "Please select a date";
         else if (input.type === "time") errorDiv.textContent = "Please select a time";
         else if (input.tagName === "SELECT") errorDiv.textContent = "Please select a service";
