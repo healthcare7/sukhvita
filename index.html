@@ -101,7 +101,7 @@ Trusted Healthcare Provider
 </span>
 
 <h1>
-3333 Healthcare Services
+4444 Healthcare Services
 At Your Doorstep
 </h1>
 
@@ -661,11 +661,14 @@ document.addEventListener("DOMContentLoaded", function() {
       return; // stop submission
     }
 
-    // Success toast with fade + slide animation
-toast.classList.add("show");
+    // Show toast with slight delay after modal closes
 setTimeout(() => {
-  toast.classList.remove("show");
-}, 4000);
+  toast.classList.add("show");
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 4000); // toast visible for 4s
+}, 300); // delay 300ms after modal close
+//tost end 
     const modalInstance = bootstrap.Modal.getInstance(modal);
     modalInstance.hide();
   });
