@@ -684,6 +684,29 @@ document.addEventListener("DOMContentLoaded", function() {
       return; // stop submission
     }
 
+     //You can replace following code to store data in database
+    //---------- Send data to Google Sheet Start -----------//
+    // Send data to Google Sheet
+  const data = {
+  name: nameInput.value,
+  phone: phoneInput.value,
+  email: emailInput.value || "Not provided",
+  city: citySelect.value,
+  date: dateInput.value,
+  time: timeInput.value,
+  service: serviceSelect.value
+};
+
+fetch("https://script.google.com/macros/s/AKfycbxmwe31zZvNAYoSh65kjQH926KPKqDJKaZM21Dr0aDumM6AURv1fYi1sEnOxXzoj9xR/exec", {
+  method: "POST",
+  body: JSON.stringify(data)
+})
+.then(res => res.text())
+.then(text => console.log("Saved to Google Sheet:", text))
+.catch(err => console.error("Error saving to Google Sheet:", err));
+
+    //---------- Send data to Google Sheet End -----------//
+
     // Show toast with slight delay after modal closes
 setTimeout(() => {
   toast.classList.add("show");
