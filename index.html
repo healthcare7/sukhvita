@@ -101,7 +101,7 @@ Trusted Healthcare Provider
 </span>
 
 <h1>
-2222 Healthcare Services
+3333 Healthcare Services
 At Your Doorstep
 </h1>
 
@@ -695,24 +695,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
      //You can replace following code to store data in database
     //---------- Send data to Google Sheet Start -----------//
-    // Send data to Google Sheet
-  const data = {
+    // Send data to Google Sheet (no-cors mode)
+const data = {
   name: nameInput.value,
   phone: phoneInput.value,
   email: emailInput.value || "Not provided",
-  city: cityInput.value,
+  city: citySelect.value,
   date: dateInput.value,
   time: timeInput.value,
-  service: serviceInput.value
+  service: serviceSelect.value
 };
 
-fetch("https://script.google.com/macros/s/AKfycbxmwe31zZvNAYoSh65kjQH926KPKqDJKaZM21Dr0aDumM6AURv1fYi1sEnOxXzoj9xR/exec", {
+fetch("YOUR_WEB_APP_URL", {
   method: "POST",
+  mode: "no-cors",   // ✅ prevents CORS error
   body: JSON.stringify(data)
-})
-.then(res => res.text())
-.then(text => console.log("Saved to Google Sheet:", text))
-.catch(err => console.error("Error saving to Google Sheet:", err));
+});
+
+// You won’t get a readable response back, but the row will be added in Google Sheet.
+
 
     //---------- Send data to Google Sheet End -----------//
 
