@@ -620,6 +620,8 @@ footer a:hover{
 .step-circle.active { background: #14939A; color: #fff; }
 .step-label { font-size: 13px; margin-top: 5px; color: #555; }
 .step-line { width: 50px; height: 3px; background: #d3d3d3; margin: auto 8px; }
+.step-container { text-align:center; margin:0 10px; }
+.step-label { font-size:13px; margin-top:5px; color:#058861; }
 
 /* Toast */
 .toast-message {
@@ -635,5 +637,8 @@ footer a:hover{
   display: none;
   z-index: 2000;
 }
+
+
+
 
 

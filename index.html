@@ -498,11 +498,20 @@ Get Started
 
       <!-- Progress Steps -->
       <div class="d-flex justify-content-center my-3">
-        <div class="step-circle active">1</div>
-        <div class="step-line"></div>
-        <div class="step-circle">2</div>
-        <div class="step-line"></div>
-        <div class="step-circle">3</div>
+        <div class="step-container">
+    <div class="step-circle active">1</div>
+    <div class="step-label">Personal Info</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step-container">
+    <div class="step-circle">2</div>
+    <div class="step-label">Select Date & Time</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step-container">
+    <div class="step-circle">3</div>
+    <div class="step-label">Select Service</div>
+  </div>
       </div>
 
       <!-- Body -->
@@ -529,10 +538,12 @@ Get Started
     <!-- Step 2 -->
     <div class="form-step">
       <div class="mb-3 text-start">
-        <input type="date" class="form-control text-center" placeholder="Select Date" required>
+        <label class="form-label">Select Date</label>
+        <input type="date" class="form-control text-center" placeholder="dd/mm/yyyy" required>
         <div class="error-message"></div>
       </div>
       <div class="mb-3 text-start">
+        <label class="form-label">Select Time</label>
         <input type="time" class="form-control text-center" placeholder="Select Time" required>
         <div class="error-message"></div>
       </div>
@@ -562,8 +573,7 @@ Get Started
   </form>
 </div>
 
-<!-- Success Toast -->
-<div id="successToast" class="toast-message">Request submitted successfully! You will get call from our side soon.</div>
+
 
 
     </div>
@@ -572,6 +582,9 @@ Get Started
 
 
 <!-- Appointment Modal end-->
+
+<!-- Success Toast -->
+<div id="successToast" class="toast-message">Request submitted successfully! You will get call from our side soon.</div>
 
 
 
@@ -590,6 +603,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const submitBtn = document.getElementById("submitBtn");
   const form = document.getElementById("appointmentForm");
   const toast = document.getElementById("successToast");
+  const modal = document.getElementById("appointmentModal");
   let currentStep = 0;
 
   function showStep(index) {
@@ -607,7 +621,7 @@ document.addEventListener("DOMContentLoaded", function() {
         valid = false;
         if (input.type === "text") errorDiv.textContent = "Please enter your name";
         else if (input.type === "tel") errorDiv.textContent = "Please enter your phone number";
-        else if (input.type === "email") errorDiv.textContent = "Please enter a valid email";
+        else if (input.type === "email" && input.value !== "") errorDiv.textContent = "Please enter a valid email";
         else if (input.type === "date") errorDiv.textContent = "Please select a date";
         else if (input.type === "time") errorDiv.textContent = "Please select a time";
         else if (input.tagName === "SELECT") errorDiv.textContent = "Please select a service";
@@ -629,27 +643,36 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Reset form on modal close
-  const modal = document.getElementById("appointmentModal");
   modal.addEventListener("hidden.bs.modal", () => {
     form.reset();
     document.querySelectorAll(".error-message").forEach(e => e.textContent = "");
     showStep(0);
   });
 
-  // Submit with toast
+  // Submit with service validation + toast
   form.addEventListener("submit", function(e) {
     e.preventDefault();
-    if (validateStep(currentStep)) {
-      toast.style.display = "block";
-      setTimeout(() => { toast.style.display = "none"; }, 4000);
-      const modalInstance = bootstrap.Modal.getInstance(modal);
-      modalInstance.hide();
+    if (!validateStep(currentStep)) return;
+
+    // Extra check for service field
+    if (serviceSelect.selectedIndex === 0) {
+      const errorDiv = serviceSelect.parentElement.querySelector(".error-message");
+      errorDiv.textContent = "Please select a service";
+      return; // stop submission
     }
+
+    // Success toast
+    toast.style.display = "block";
+    setTimeout(() => { toast.style.display = "none"; }, 4000);
+    const modalInstance = bootstrap.Modal.getInstance(modal);
+    modalInstance.hide();
   });
 
   showStep(0);
 });
 </script>
+
+
 
  <!-- Script section end-->
 
