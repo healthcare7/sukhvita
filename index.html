@@ -101,7 +101,7 @@ Trusted Healthcare Provider
 </span>
 
 <h1>
-Healthcare Services
+2222 Healthcare Services
 At Your Doorstep
 </h1>
 
@@ -520,19 +520,19 @@ Get Started
           <!-- Step 1 -->
             <div class="form-step active">
               <div class="mb-3 text-start">
-                <input type="text" class="form-control text-center" placeholder="Full Name" required>
+                <input type="text" id="nameInput" class="form-control text-center" placeholder="Full Name" required>
                 <div class="error-message"></div>
               </div>
               <div class="mb-3 text-start">
-                <input type="tel" class="form-control text-center" placeholder="Phone Number" required pattern="[0-9]{10}">
+                <input type="tel" id="phoneInput" class="form-control text-center" placeholder="Phone Number" required pattern="[0-9]{10}">
                 <div class="error-message"></div>
               </div>
               <div class="mb-3 text-start">
-                <input type="email" class="form-control text-center" placeholder="Email (optional)">
+                <input type="email" id="emailInput" class="form-control text-center" placeholder="Email (optional)">
                 <div class="error-message"></div>
               </div>
               <div class="mb-3 text-start">
-                <select id="citySelect" class="form-select text-center" required>
+                <select id="citySelect" id="citySelect" class="form-select text-center" required>
                   <option disabled selected>Select City</option>
                   <option>Sangli</option>
                   <option>Miraj</option>
@@ -550,12 +550,12 @@ Get Started
     <div class="form-step">
       <div class="mb-3 text-start">
         <label class="form-label">Select Date</label>
-        <input type="date" class="form-control text-center" placeholder="dd/mm/yyyy" required>
+        <input type="date" id="dateInput" class="form-control text-center" placeholder="dd/mm/yyyy" required>
         <div class="error-message"></div>
       </div>
       <div class="mb-3 text-start">
         <label class="form-label">Select Time</label>
-        <input type="time" class="form-control text-center" placeholder="Select Time" required>
+        <input type="time" id="timeInput" class="form-control text-center" placeholder="Select Time" required>
         <div class="error-message"></div>
       </div>
       <button type="button" class="btn btn-outline-brand btn-sm prev-step me-2">Back</button>
@@ -565,7 +565,7 @@ Get Started
     <!-- Step 3 -->
     <div class="form-step">
       <div class="mb-3 text-start">
-        <select id="serviceSelect" class="form-select text-center" required>
+        <select id="serviceSelect" id="serviceSelect" class="form-select text-center" required>
           <option disabled selected>Select Service</option>
           <option>Nursing Care</option>
           <option>Elder Care</option>
@@ -616,6 +616,15 @@ document.addEventListener("DOMContentLoaded", function() {
   const toast = document.getElementById("successToast");
   const modal = document.getElementById("appointmentModal");
   let currentStep = 0;
+
+    // ✅ Getting element ID
+  const nameInput = document.getElementById("nameInput");
+  const phoneInput = document.getElementById("phoneInput");
+  const emailInput = document.getElementById("emailInput");
+  const cityInput = document.getElementById("citySelect");
+  const dateInput = document.getElementById("dateInput");
+  const timeInput = document.getElementById("timeInput"); 
+  const serviceInput = document.getElementById("serviceSelect");
 
   function showStep(index) {
     steps.forEach((step, i) => step.classList.toggle("active", i === index));
@@ -691,10 +700,10 @@ document.addEventListener("DOMContentLoaded", function() {
   name: nameInput.value,
   phone: phoneInput.value,
   email: emailInput.value || "Not provided",
-  city: citySelect.value,
+  city: cityInput.value,
   date: dateInput.value,
   time: timeInput.value,
-  service: serviceSelect.value
+  service: serviceInput.value
 };
 
 fetch("https://script.google.com/macros/s/AKfycbxmwe31zZvNAYoSh65kjQH926KPKqDJKaZM21Dr0aDumM6AURv1fYi1sEnOxXzoj9xR/exec", {
