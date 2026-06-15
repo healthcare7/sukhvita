@@ -661,9 +661,11 @@ document.addEventListener("DOMContentLoaded", function() {
       return; // stop submission
     }
 
-    // Success toast
-    toast.style.display = "block";
-    setTimeout(() => { toast.style.display = "none"; }, 4000);
+    // Success toast with fade animation
+toast.classList.add("show");
+setTimeout(() => {
+  toast.classList.remove("show");
+}, 4000);
     const modalInstance = bootstrap.Modal.getInstance(modal);
     modalInstance.hide();
   });

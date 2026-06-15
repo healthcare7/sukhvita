@@ -624,6 +624,7 @@ footer a:hover{
 .step-label { font-size:13px; margin-top:5px; color:#058861; }
 
 /* Toast */
+
 .toast-message {
   position: fixed;
   bottom: 20px;
@@ -636,6 +637,15 @@ footer a:hover{
   font-size: 14px;
   display: none;
   z-index: 2000;
+
+  /* Animation */
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.toast-message.show {
+  display: block;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px); /* slight slide up */
 }
 
 
